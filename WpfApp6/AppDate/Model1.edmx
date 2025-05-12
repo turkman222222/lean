@@ -1,0 +1,732 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bron">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id_car" Type="int" Nullable="false" />
+          <Property Name="id_usr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Carss">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="model" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_marki" Type="int" Nullable="false" />
+          <Property Name="id_str" Type="int" Nullable="false" />
+          <Property Name="god_poiz" Type="int" Nullable="false" />
+          <Property Name="id_cvet" Type="int" Nullable="false" />
+          <Property Name="id_salona" Type="int" Nullable="false" />
+          <Property Name="id_kompl" Type="int" Nullable="false" />
+          <Property Name="image" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="compl">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kompl_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cveta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cvet_name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="izbr">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="car_id" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Marks">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_marka" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rol">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="rol_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="salonch">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="salon" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="strana">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="strana" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="user_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="mail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="rol_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_bron_Carss">
+          <End Role="Carss" Type="Self.Carss" Multiplicity="1" />
+          <End Role="bron" Type="Self.bron" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carss">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bron">
+              <PropertyRef Name="id_car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_bron_Carss1">
+          <End Role="Carss" Type="Self.Carss" Multiplicity="1" />
+          <End Role="bron" Type="Self.bron" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carss">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bron">
+              <PropertyRef Name="id_car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_bron_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="bron" Type="Self.bron" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bron">
+              <PropertyRef Name="id_usr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Carss_compl">
+          <End Role="compl" Type="Self.compl" Multiplicity="1" />
+          <End Role="Carss" Type="Self.Carss" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="compl">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Carss">
+              <PropertyRef Name="id_kompl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Carss_cveta">
+          <End Role="cveta" Type="Self.cveta" Multiplicity="1" />
+          <End Role="Carss" Type="Self.Carss" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cveta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Carss">
+              <PropertyRef Name="id_cvet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Carss_Marks">
+          <End Role="Marks" Type="Self.Marks" Multiplicity="1" />
+          <End Role="Carss" Type="Self.Carss" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marks">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Carss">
+              <PropertyRef Name="id_marki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Carss_salonch">
+          <End Role="salonch" Type="Self.salonch" Multiplicity="1" />
+          <End Role="Carss" Type="Self.Carss" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="salonch">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Carss">
+              <PropertyRef Name="id_salona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Carss_strana">
+          <End Role="strana" Type="Self.strana" Multiplicity="1" />
+          <End Role="Carss" Type="Self.Carss" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="strana">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Carss">
+              <PropertyRef Name="id_str" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_izbr_Carss">
+          <End Role="Carss" Type="Self.Carss" Multiplicity="1" />
+          <End Role="izbr" Type="Self.izbr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carss">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="izbr">
+              <PropertyRef Name="car_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_izbr_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="izbr" Type="Self.izbr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="izbr">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_rol">
+          <End Role="rol" Type="Self.rol" Multiplicity="1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rol">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="rol_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="bron" EntityType="Self.bron" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Carss" EntityType="Self.Carss" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="compl" EntityType="Self.compl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cveta" EntityType="Self.cveta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="izbr" EntityType="Self.izbr" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marks" EntityType="Self.Marks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rol" EntityType="Self.rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="salonch" EntityType="Self.salonch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="strana" EntityType="Self.strana" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_bron_Carss" Association="Self.FK_bron_Carss">
+            <End Role="Carss" EntitySet="Carss" />
+            <End Role="bron" EntitySet="bron" />
+          </AssociationSet>
+          <AssociationSet Name="FK_bron_Carss1" Association="Self.FK_bron_Carss1">
+            <End Role="Carss" EntitySet="Carss" />
+            <End Role="bron" EntitySet="bron" />
+          </AssociationSet>
+          <AssociationSet Name="FK_bron_user" Association="Self.FK_bron_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="bron" EntitySet="bron" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Carss_compl" Association="Self.FK_Carss_compl">
+            <End Role="compl" EntitySet="compl" />
+            <End Role="Carss" EntitySet="Carss" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Carss_cveta" Association="Self.FK_Carss_cveta">
+            <End Role="cveta" EntitySet="cveta" />
+            <End Role="Carss" EntitySet="Carss" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Carss_Marks" Association="Self.FK_Carss_Marks">
+            <End Role="Marks" EntitySet="Marks" />
+            <End Role="Carss" EntitySet="Carss" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Carss_salonch" Association="Self.FK_Carss_salonch">
+            <End Role="salonch" EntitySet="salonch" />
+            <End Role="Carss" EntitySet="Carss" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Carss_strana" Association="Self.FK_Carss_strana">
+            <End Role="strana" EntitySet="strana" />
+            <End Role="Carss" EntitySet="Carss" />
+          </AssociationSet>
+          <AssociationSet Name="FK_izbr_Carss" Association="Self.FK_izbr_Carss">
+            <End Role="Carss" EntitySet="Carss" />
+            <End Role="izbr" EntitySet="izbr" />
+          </AssociationSet>
+          <AssociationSet Name="FK_izbr_user" Association="Self.FK_izbr_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="izbr" EntitySet="izbr" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_rol" Association="Self.FK_user_rol">
+            <End Role="rol" EntitySet="rol" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="bron">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id_car" Type="Int32" Nullable="false" />
+          <Property Name="id_usr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Carss" Relationship="Self.FK_bron_Carss" FromRole="bron" ToRole="Carss" />
+          <NavigationProperty Name="Carss1" Relationship="Self.FK_bron_Carss1" FromRole="bron" ToRole="Carss" />
+          <NavigationProperty Name="user" Relationship="Self.FK_bron_user" FromRole="bron" ToRole="user" />
+        </EntityType>
+        <EntityType Name="Carss">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_marki" Type="Int32" Nullable="false" />
+          <Property Name="id_str" Type="Int32" Nullable="false" />
+          <Property Name="god_poiz" Type="Int32" Nullable="false" />
+          <Property Name="id_cvet" Type="Int32" Nullable="false" />
+          <Property Name="id_salona" Type="Int32" Nullable="false" />
+          <Property Name="id_kompl" Type="Int32" Nullable="false" />
+          <Property Name="image" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="bron" Relationship="Self.FK_bron_Carss" FromRole="Carss" ToRole="bron" />
+          <NavigationProperty Name="bron1" Relationship="Self.FK_bron_Carss1" FromRole="Carss" ToRole="bron" />
+          <NavigationProperty Name="compl" Relationship="Self.FK_Carss_compl" FromRole="Carss" ToRole="compl" />
+          <NavigationProperty Name="cveta" Relationship="Self.FK_Carss_cveta" FromRole="Carss" ToRole="cveta" />
+          <NavigationProperty Name="Marks" Relationship="Self.FK_Carss_Marks" FromRole="Carss" ToRole="Marks" />
+          <NavigationProperty Name="salonch" Relationship="Self.FK_Carss_salonch" FromRole="Carss" ToRole="salonch" />
+          <NavigationProperty Name="strana" Relationship="Self.FK_Carss_strana" FromRole="Carss" ToRole="strana" />
+          <NavigationProperty Name="izbr" Relationship="Self.FK_izbr_Carss" FromRole="Carss" ToRole="izbr" />
+        </EntityType>
+        <EntityType Name="compl">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kompl_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Carss" Relationship="Self.FK_Carss_compl" FromRole="compl" ToRole="Carss" />
+        </EntityType>
+        <EntityType Name="cveta">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cvet_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Carss" Relationship="Self.FK_Carss_cveta" FromRole="cveta" ToRole="Carss" />
+        </EntityType>
+        <EntityType Name="izbr">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="car_id" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Carss" Relationship="Self.FK_izbr_Carss" FromRole="izbr" ToRole="Carss" />
+          <NavigationProperty Name="user" Relationship="Self.FK_izbr_user" FromRole="izbr" ToRole="user" />
+        </EntityType>
+        <EntityType Name="Marks">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_marka" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Carss" Relationship="Self.FK_Carss_Marks" FromRole="Marks" ToRole="Carss" />
+        </EntityType>
+        <EntityType Name="rol">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="rol_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="Self.FK_user_rol" FromRole="rol" ToRole="user" />
+        </EntityType>
+        <EntityType Name="salonch">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="salon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Carss" Relationship="Self.FK_Carss_salonch" FromRole="salonch" ToRole="Carss" />
+        </EntityType>
+        <EntityType Name="strana">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="strana1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Carss" Relationship="Self.FK_Carss_strana" FromRole="strana" ToRole="Carss" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="rol_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="bron" Relationship="Self.FK_bron_user" FromRole="user" ToRole="bron" />
+          <NavigationProperty Name="izbr" Relationship="Self.FK_izbr_user" FromRole="user" ToRole="izbr" />
+          <NavigationProperty Name="rol" Relationship="Self.FK_user_rol" FromRole="user" ToRole="rol" />
+        </EntityType>
+        <Association Name="FK_bron_Carss">
+          <End Role="Carss" Type="Self.Carss" Multiplicity="1" />
+          <End Role="bron" Type="Self.bron" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carss">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bron">
+              <PropertyRef Name="id_car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_bron_Carss1">
+          <End Role="Carss" Type="Self.Carss" Multiplicity="1" />
+          <End Role="bron" Type="Self.bron" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carss">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bron">
+              <PropertyRef Name="id_car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_bron_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="bron" Type="Self.bron" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bron">
+              <PropertyRef Name="id_usr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Carss_compl">
+          <End Role="compl" Type="Self.compl" Multiplicity="1" />
+          <End Role="Carss" Type="Self.Carss" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="compl">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Carss">
+              <PropertyRef Name="id_kompl" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Carss_cveta">
+          <End Role="cveta" Type="Self.cveta" Multiplicity="1" />
+          <End Role="Carss" Type="Self.Carss" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cveta">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Carss">
+              <PropertyRef Name="id_cvet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Carss_Marks">
+          <End Role="Marks" Type="Self.Marks" Multiplicity="1" />
+          <End Role="Carss" Type="Self.Carss" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marks">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Carss">
+              <PropertyRef Name="id_marki" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Carss_salonch">
+          <End Role="salonch" Type="Self.salonch" Multiplicity="1" />
+          <End Role="Carss" Type="Self.Carss" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="salonch">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Carss">
+              <PropertyRef Name="id_salona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Carss_strana">
+          <End Role="strana" Type="Self.strana" Multiplicity="1" />
+          <End Role="Carss" Type="Self.Carss" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="strana">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Carss">
+              <PropertyRef Name="id_str" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_izbr_Carss">
+          <End Role="Carss" Type="Self.Carss" Multiplicity="1" />
+          <End Role="izbr" Type="Self.izbr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carss">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="izbr">
+              <PropertyRef Name="car_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_izbr_user">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="izbr" Type="Self.izbr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="izbr">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_rol">
+          <End Role="rol" Type="Self.rol" Multiplicity="1" />
+          <End Role="user" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rol">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="rol_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bron" EntityType="Self.bron" />
+          <EntitySet Name="Carss" EntityType="Self.Carss" />
+          <EntitySet Name="compl" EntityType="Self.compl" />
+          <EntitySet Name="cveta" EntityType="Self.cveta" />
+          <EntitySet Name="izbr" EntityType="Self.izbr" />
+          <EntitySet Name="Marks" EntityType="Self.Marks" />
+          <EntitySet Name="rol" EntityType="Self.rol" />
+          <EntitySet Name="salonch" EntityType="Self.salonch" />
+          <EntitySet Name="strana" EntityType="Self.strana" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="user" EntityType="Self.user" />
+          <AssociationSet Name="FK_bron_Carss" Association="Self.FK_bron_Carss">
+            <End Role="Carss" EntitySet="Carss" />
+            <End Role="bron" EntitySet="bron" />
+          </AssociationSet>
+          <AssociationSet Name="FK_bron_Carss1" Association="Self.FK_bron_Carss1">
+            <End Role="Carss" EntitySet="Carss" />
+            <End Role="bron" EntitySet="bron" />
+          </AssociationSet>
+          <AssociationSet Name="FK_bron_user" Association="Self.FK_bron_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="bron" EntitySet="bron" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Carss_compl" Association="Self.FK_Carss_compl">
+            <End Role="compl" EntitySet="compl" />
+            <End Role="Carss" EntitySet="Carss" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Carss_cveta" Association="Self.FK_Carss_cveta">
+            <End Role="cveta" EntitySet="cveta" />
+            <End Role="Carss" EntitySet="Carss" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Carss_Marks" Association="Self.FK_Carss_Marks">
+            <End Role="Marks" EntitySet="Marks" />
+            <End Role="Carss" EntitySet="Carss" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Carss_salonch" Association="Self.FK_Carss_salonch">
+            <End Role="salonch" EntitySet="salonch" />
+            <End Role="Carss" EntitySet="Carss" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Carss_strana" Association="Self.FK_Carss_strana">
+            <End Role="strana" EntitySet="strana" />
+            <End Role="Carss" EntitySet="Carss" />
+          </AssociationSet>
+          <AssociationSet Name="FK_izbr_Carss" Association="Self.FK_izbr_Carss">
+            <End Role="Carss" EntitySet="Carss" />
+            <End Role="izbr" EntitySet="izbr" />
+          </AssociationSet>
+          <AssociationSet Name="FK_izbr_user" Association="Self.FK_izbr_user">
+            <End Role="user" EntitySet="user" />
+            <End Role="izbr" EntitySet="izbr" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_rol" Association="Self.FK_user_rol">
+            <End Role="rol" EntitySet="rol" />
+            <End Role="user" EntitySet="user" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="bron">
+            <EntityTypeMapping TypeName="Model.bron">
+              <MappingFragment StoreEntitySet="bron">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_car" ColumnName="id_car" />
+                <ScalarProperty Name="id_usr" ColumnName="id_usr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carss">
+            <EntityTypeMapping TypeName="Model.Carss">
+              <MappingFragment StoreEntitySet="Carss">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="id_marki" ColumnName="id_marki" />
+                <ScalarProperty Name="id_str" ColumnName="id_str" />
+                <ScalarProperty Name="god_poiz" ColumnName="god_poiz" />
+                <ScalarProperty Name="id_cvet" ColumnName="id_cvet" />
+                <ScalarProperty Name="id_salona" ColumnName="id_salona" />
+                <ScalarProperty Name="id_kompl" ColumnName="id_kompl" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="compl">
+            <EntityTypeMapping TypeName="Model.compl">
+              <MappingFragment StoreEntitySet="compl">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="kompl_name" ColumnName="kompl_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cveta">
+            <EntityTypeMapping TypeName="Model.cveta">
+              <MappingFragment StoreEntitySet="cveta">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="cvet_name" ColumnName="cvet_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="izbr">
+            <EntityTypeMapping TypeName="Model.izbr">
+              <MappingFragment StoreEntitySet="izbr">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="car_id" ColumnName="car_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Marks">
+            <EntityTypeMapping TypeName="Model.Marks">
+              <MappingFragment StoreEntitySet="Marks">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name_marka" ColumnName="name_marka" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rol">
+            <EntityTypeMapping TypeName="Model.rol">
+              <MappingFragment StoreEntitySet="rol">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="rol_name" ColumnName="rol_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="salonch">
+            <EntityTypeMapping TypeName="Model.salonch">
+              <MappingFragment StoreEntitySet="salonch">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="salon" ColumnName="salon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="strana">
+            <EntityTypeMapping TypeName="Model.strana">
+              <MappingFragment StoreEntitySet="strana">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="strana1" ColumnName="strana" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user">
+            <EntityTypeMapping TypeName="Model.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_name" ColumnName="user_name" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="rol_id" ColumnName="rol_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6d31a778efdf442ea4fcc018570a1fe7" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.bron" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Carss" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.compl" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.cveta" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.izbr" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Marks" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.rol" Width="1.5" PointX="0.75" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.salonch" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.strana" Width="1.5" PointX="0.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="5.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.user" Width="1.5" PointX="3" PointY="17.25" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_bron_Carss" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_bron_Carss1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_bron_user" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Carss_compl" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Carss_cveta" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Carss_Marks" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Carss_salonch" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Carss_strana" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_izbr_Carss" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_izbr_user" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_user_rol" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
