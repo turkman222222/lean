@@ -21,6 +21,7 @@ namespace WpfApp6.pages
     /// </summary>
     public partial class userpanel : Page
     {
+        
         public userpanel()
         {
             InitializeComponent();
@@ -38,6 +39,7 @@ namespace WpfApp6.pages
             {
                 vidRecept.Items.Add(item.name_marka);
             }
+
         }
 
         private void Prod_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -98,16 +100,19 @@ namespace WpfApp6.pages
         {
             if (Prod.SelectedItem is Carss selectedRecipe)
             {
+                //MessageBox.Show($"id_user: {id_user}");
                 AddToFavorites(selectedRecipe.id);
                 MessageBox.Show("Рецепт добавлен в избранное!");
             }
         }
-        public void AddToFavorites(int id_user)
+        public void AddToFavorites(int id)
         {
+            
             var newLikeRecipe = new izbr
             {
-                user_id = AppConnect.id_user,
-                id = id_user,
+                user_id = AppConnect.id_userr,
+                car_id = id,
+
             };
 
             AppConnect.model2.izbr.Add(newLikeRecipe);

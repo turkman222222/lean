@@ -16,7 +16,7 @@ namespace WpfApp6.AppDate
     public partial class Entities2 : DbContext
     {
         public Entities2()
-            : base("name=Entities3")
+            : base("name=Entities2")
         {
         }
     

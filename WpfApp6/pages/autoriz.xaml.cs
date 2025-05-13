@@ -37,7 +37,8 @@ namespace WpfApp6.pages
             else if (user_object != null) 
             {
                 MessageBox.Show("Привет " + user_object.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                AppConnect.id_user = (int)user_object.rol_id;
+                AppConnect.id_userr = (int)user_object.id_user;
+                    
 
                 // Проверка роли пользователя
                 if (user_object.rol_id == 1)
