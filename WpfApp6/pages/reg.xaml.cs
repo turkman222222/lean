@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp6.AppDate;
 
 namespace WpfApp6.pages
 {
@@ -24,5 +25,48 @@ namespace WpfApp6.pages
         {
             InitializeComponent();
         }
+
+        private void reg55_Click(object sender, RoutedEventArgs e)
+        {
+            if (AppDate.AppConnect.model2.user.Count(x => x.login == LoginBox.Text) > 0)
+            {
+                MessageBox.Show("Пользователь с таким логином уже есть!", "Уведомление",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+            try
+            {
+                user userObjj = new user()
+                {
+
+                    mail = mailBox.Text,
+                    user_name = user_nameBox.Text,
+                    login = LoginBox.Text,
+                    password = PasswordBox.Password,
+                    rol_id = 1
+
+                };
+                AppDate.AppConnect.model2.user.Add(userObjj);
+                AppDate.AppConnect.model2.SaveChanges();
+                MessageBox.Show("Данные успешно добавлены!", "Уведомление",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+                
+
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка при добавлении данных!",
+                    "Уведомление", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void LoginBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
-}
+    }
+

@@ -25,7 +25,8 @@
           <Property Name="id_cvet" Type="int" Nullable="false" />
           <Property Name="id_salona" Type="int" Nullable="false" />
           <Property Name="id_kompl" Type="int" Nullable="false" />
-          <Property Name="image" Type="nchar" MaxLength="10" />
+          <Property Name="image" Type="varbinary(max)" />
+          <Property Name="price" Type="int" />
         </EntityType>
         <EntityType Name="compl">
           <Key>
@@ -60,7 +61,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="rol_name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="salonch">
@@ -89,14 +90,14 @@
         </EntityType>
         <EntityType Name="user">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="id_user" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="user_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="mail" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="rol_id" Type="int" Nullable="false" />
+          <Property Name="rol_id" Type="int" />
         </EntityType>
         <Association Name="FK_bron_Carss">
           <End Role="Carss" Type="Self.Carss" Multiplicity="1" />
@@ -127,7 +128,7 @@
           <End Role="bron" Type="Self.bron" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="user">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="id_user" />
             </Principal>
             <Dependent Role="bron">
               <PropertyRef Name="id_usr" />
@@ -211,7 +212,7 @@
           <End Role="izbr" Type="Self.izbr" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="user">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="id_user" />
             </Principal>
             <Dependent Role="izbr">
               <PropertyRef Name="user_id" />
@@ -219,7 +220,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_user_rol">
-          <End Role="rol" Type="Self.rol" Multiplicity="1" />
+          <End Role="rol" Type="Self.rol" Multiplicity="0..1" />
           <End Role="user" Type="Self.user" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="rol">
@@ -315,7 +316,8 @@
           <Property Name="id_cvet" Type="Int32" Nullable="false" />
           <Property Name="id_salona" Type="Int32" Nullable="false" />
           <Property Name="id_kompl" Type="Int32" Nullable="false" />
-          <Property Name="image" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="price" Type="Int32" />
           <NavigationProperty Name="bron" Relationship="Self.FK_bron_Carss" FromRole="Carss" ToRole="bron" />
           <NavigationProperty Name="bron1" Relationship="Self.FK_bron_Carss1" FromRole="Carss" ToRole="bron" />
           <NavigationProperty Name="compl" Relationship="Self.FK_Carss_compl" FromRole="Carss" ToRole="compl" />
@@ -363,7 +365,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="rol_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="user" Relationship="Self.FK_user_rol" FromRole="rol" ToRole="user" />
         </EntityType>
@@ -395,14 +397,14 @@
         </EntityType>
         <EntityType Name="user">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="id_user" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="user_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="rol_id" Type="Int32" Nullable="false" />
+          <Property Name="rol_id" Type="Int32" />
           <NavigationProperty Name="bron" Relationship="Self.FK_bron_user" FromRole="user" ToRole="bron" />
           <NavigationProperty Name="izbr" Relationship="Self.FK_izbr_user" FromRole="user" ToRole="izbr" />
           <NavigationProperty Name="rol" Relationship="Self.FK_user_rol" FromRole="user" ToRole="rol" />
@@ -436,7 +438,7 @@
           <End Role="bron" Type="Self.bron" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="user">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="id_user" />
             </Principal>
             <Dependent Role="bron">
               <PropertyRef Name="id_usr" />
@@ -520,7 +522,7 @@
           <End Role="izbr" Type="Self.izbr" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="user">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="id_user" />
             </Principal>
             <Dependent Role="izbr">
               <PropertyRef Name="user_id" />
@@ -528,7 +530,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_user_rol">
-          <End Role="rol" Type="Self.rol" Multiplicity="1" />
+          <End Role="rol" Type="Self.rol" Multiplicity="0..1" />
           <End Role="user" Type="Self.user" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="rol">
@@ -539,7 +541,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="bron" EntityType="Self.bron" />
           <EntitySet Name="Carss" EntityType="Self.Carss" />
           <EntitySet Name="compl" EntityType="Self.compl" />
@@ -601,7 +603,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities3">
           <EntitySetMapping Name="bron">
             <EntityTypeMapping TypeName="Model.bron">
               <MappingFragment StoreEntitySet="bron">
@@ -623,6 +625,7 @@
                 <ScalarProperty Name="id_salona" ColumnName="id_salona" />
                 <ScalarProperty Name="id_kompl" ColumnName="id_kompl" />
                 <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="price" ColumnName="price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -697,7 +700,7 @@
           <EntitySetMapping Name="user">
             <EntityTypeMapping TypeName="Model.user">
               <MappingFragment StoreEntitySet="user">
-                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
                 <ScalarProperty Name="user_name" ColumnName="user_name" />
                 <ScalarProperty Name="mail" ColumnName="mail" />
                 <ScalarProperty Name="login" ColumnName="login" />

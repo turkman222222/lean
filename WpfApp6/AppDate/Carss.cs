@@ -30,7 +30,8 @@ namespace WpfApp6.AppDate
         public int id_cvet { get; set; }
         public int id_salona { get; set; }
         public int id_kompl { get; set; }
-        public string image { get; set; }
+        public byte[] image { get; set; }
+        public Nullable<int> price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bron> bron { get; set; }

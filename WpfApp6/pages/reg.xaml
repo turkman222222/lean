@@ -9,6 +9,15 @@
       Title="reg">
 
     <Grid>
-        
+        <Button x:Name="reg55" Content="Зарегестрироваться" HorizontalAlignment="Left" Margin="304,283,0,0" VerticalAlignment="Top" Click="reg55_Click"/>
+        <TextBox x:Name="LoginBox" HorizontalAlignment="Left" Margin="297,89,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" TextChanged="LoginBox_TextChanged"/>
+        <TextBlock x:Name="txtLogin2" HorizontalAlignment="Left" Margin="297,68,0,0" TextWrapping="Wrap" Text="Придумайте логин" VerticalAlignment="Top"/>
+        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Margin="297,133,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBlock x:Name="txtpassword2" HorizontalAlignment="Left" Margin="297,112,0,0" TextWrapping="Wrap" Text="Пидумайте пароль" VerticalAlignment="Top"/>
+        <TextBox x:Name="mailBox" HorizontalAlignment="Left" Margin="298,177,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBlock x:Name="txtmail" HorizontalAlignment="Left" Margin="298,156,0,0" TextWrapping="Wrap" Text="Введите почту" VerticalAlignment="Top"/>
+        <TextBox x:Name="user_nameBox" HorizontalAlignment="Left" Margin="298,221,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" />
+        <TextBlock x:Name="txtLogin2_Копировать1" HorizontalAlignment="Left" Margin="298,200,0,0" TextWrapping="Wrap" Text="Придумайте имя" VerticalAlignment="Top"/>
+
     </Grid>
 </Page>

@@ -21,12 +21,12 @@ namespace WpfApp6.AppDate
             this.izbr = new HashSet<izbr>();
         }
     
-        public int id { get; set; }
+        public int id_user { get; set; }
         public string user_name { get; set; }
         public string mail { get; set; }
         public string login { get; set; }
         public string password { get; set; }
-        public int rol_id { get; set; }
+        public Nullable<int> rol_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bron> bron { get; set; }

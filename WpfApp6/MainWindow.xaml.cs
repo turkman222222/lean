@@ -25,7 +25,7 @@ namespace WpfApp6
         public MainWindow()
         {
             InitializeComponent();
-            AppDate.AppConnect.model1 = new Entities();
+            AppDate.AppConnect.model2 = new Entities2();
             AppDate.AppFrame.frmMane2 = frmMane;
             frmMane.Navigate(new pages.autoriz());
 

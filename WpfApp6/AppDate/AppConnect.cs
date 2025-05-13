@@ -8,7 +8,7 @@ namespace WpfApp6.AppDate
 {
     internal class AppConnect
     {
-        public static Entities model1;
+        public static Entities2 model2;
         public static int id_user;
     }
 }

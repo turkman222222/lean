@@ -28,7 +28,7 @@ namespace WpfApp6.pages
 
         private void btnAutoriz_Click(object sender, RoutedEventArgs e)
         {
-            var user_object = AppDate.AppConnect.model1.user.FirstOrDefault(x => x.login == txtLogin.Text && x.password == passBoxpassword.Password);
+            var user_object = AppDate.AppConnect.model2.user.FirstOrDefault(x => x.login == txtLogin.Text && x.password == passBoxpassword.Password);
 
             if (user_object == null)
             {
@@ -37,7 +37,7 @@ namespace WpfApp6.pages
             else if (user_object != null) 
             {
                 MessageBox.Show("Привет " + user_object.user_name + "!", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
-                AppConnect.id_user = user_object.rol_id;
+                AppConnect.id_user = (int)user_object.rol_id;
 
                 // Проверка роли пользователя
                 if (user_object.rol_id == 1)
