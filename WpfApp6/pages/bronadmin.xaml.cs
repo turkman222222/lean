@@ -16,16 +16,17 @@ using System.Windows.Shapes;
 namespace WpfApp6.pages
 {
     /// <summary>
-    /// Логика взаимодействия для Addpage.xaml
+    /// Логика взаимодействия для bronadmin.xaml
     /// </summary>
-    public partial class Addpage : Page
+    public partial class bronadmin : Page
     {
-        public Addpage()
+        public bronadmin()
         {
             InitializeComponent();
+            Prod.ItemsSource = AppDate.AppConnect.model2.bron.ToList();
         }
 
-        private void btnSave_Click(object sender, RoutedEventArgs e)
+        private void Prod_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

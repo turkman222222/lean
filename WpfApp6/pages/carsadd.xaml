@@ -1,0 +1,34 @@
+﻿<Page x:Class="WpfApp6.pages.carsadd"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp6.pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="carsadd">
+    <Grid Background="#FF8EA542">
+        <Button x:Name="btnSave" Content="Сохранить" HorizontalAlignment="Left" Margin="337,281,0,0" VerticalAlignment="Top" Click="btnSave_Click" />
+        <ComboBox x:Name="txtstrana"  SelectedIndex="{Binding id_str}" HorizontalAlignment="Left" Margin="595,31,0,0" VerticalAlignment="Top" Width="120" />
+        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding model}" VerticalAlignment="Top" Width="202" Height="23" Margin="6,31,0,0"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="модель" VerticalAlignment="Top" RenderTransformOrigin="0.312,-2.876" Width="60" />
+        <TextBox x:Name="god" Text="{Binding god_poiz}"  HorizontalAlignment="Left" Margin="225,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="226" Height="23" TextChanged="text03_TextChanged"/>
+        <TextBlock HorizontalAlignment="Left" Margin="225,10,0,0" TextWrapping="Wrap" Text="год производства" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="598,10,0,0" TextWrapping="Wrap" Text="страна" VerticalAlignment="Top" RenderTransformOrigin="-4.324,8.277"/>
+      
+        <TextBlock HorizontalAlignment="Left" Margin="14,64,0,0" TextWrapping="Wrap" Text="цвет" VerticalAlignment="Top"/>
+        <Button Content="Вернуться назад" HorizontalAlignment="Left" Margin="423,281,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <ComboBox x:Name="txtmark"  SelectedIndex="{Binding id_marki}" HorizontalAlignment="Left" Margin="463,31,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="txtmark_SelectionChanged" />
+        <TextBlock HorizontalAlignment="Left" Margin="463,10,0,0" TextWrapping="Wrap" Text="Марка" VerticalAlignment="Top"/>
+        <ComboBox x:Name="txtcvet" SelectedIndex="{Binding id_cvet}" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="txtsalon" SelectedIndex="{Binding  id_salona}" HorizontalAlignment="Left" Margin="154,85,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="158,64,0,0" TextWrapping="Wrap" Text="салон" VerticalAlignment="Top"/>
+      
+        <TextBlock HorizontalAlignment="Left" Margin="296,64,0,0" TextWrapping="Wrap" Text="Коплектация" VerticalAlignment="Top"/>
+        <ComboBox x:Name="txtkompl" SelectedIndex="{Binding id_kompl}" HorizontalAlignment="Left" Margin="292,85,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="txtCategoriesName_Копировать4_SelectionChanged"/>
+        <Button x:Name="foto" Content="фото" HorizontalAlignment="Left" Margin="439,85,0,0" VerticalAlignment="Top" Height="22" Width="31" Click="Button_Click"/>
+        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding price}" VerticalAlignment="Top" Width="202" Height="23" Margin="498,85,0,0" />
+        <TextBlock HorizontalAlignment="Left" Margin="502,64,0,0" TextWrapping="Wrap" Text="цена" VerticalAlignment="Top" RenderTransformOrigin="0.312,-2.876" Width="60" />
+
+    </Grid>
+</Page>

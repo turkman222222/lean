@@ -21,7 +21,7 @@ namespace WpfApp6.AppDate
         }
     
         public int id { get; set; }
-        public string strana1 { get; set; }
+        public string strana_name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Carss> Carss { get; set; }

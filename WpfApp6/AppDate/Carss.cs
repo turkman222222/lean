@@ -11,8 +11,11 @@ namespace WpfApp6.AppDate
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class Carss
+    using System.IO;
+
+   
+
+public partial class Carss
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Carss()
@@ -21,7 +24,7 @@ namespace WpfApp6.AppDate
             this.bron1 = new HashSet<bron>();
             this.izbr = new HashSet<izbr>();
         }
-    
+
         public int id { get; set; }
         public string model { get; set; }
         public int id_marki { get; set; }
@@ -32,7 +35,7 @@ namespace WpfApp6.AppDate
         public int id_kompl { get; set; }
         public byte[] image { get; set; }
         public Nullable<int> price { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bron> bron { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -44,5 +47,22 @@ namespace WpfApp6.AppDate
         public virtual strana strana { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<izbr> izbr { get; set; }
+        public string CurrentPhoto
+        {
+            get
+            {
+                // If we have image data, return a temporary file path
+                if (image != null && image.Length > 0)
+                {
+                    string tempFile = Path.GetTempFileName();
+                    File.WriteAllBytes(tempFile, image);
+                    return tempFile;
+                }
+
+                // Otherwise return default image
+                return Path.Combine(Directory.GetCurrentDirectory(), "img", "picture.jpg");
+            }
+        }
     }
+
 }

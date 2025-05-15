@@ -50,7 +50,7 @@ namespace WpfApp6.pages
                 else if (user_object.rol_id == 2)
                 {
                     // Переход на второе окно
-                    adminpanel secondWindow = new adminpanel();
+                    putadmin secondWindow = new putadmin();
                     NavigationService.Navigate(secondWindow);
                 }
                 else

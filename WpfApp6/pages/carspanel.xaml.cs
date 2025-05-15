@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace WpfApp6.pages
 {
     /// <summary>
-    /// Логика взаимодействия для Addpage.xaml
+    /// Логика взаимодействия для carspanel.xaml
     /// </summary>
-    public partial class Addpage : Page
+    public partial class carspanel : Page
     {
-        public Addpage()
+        public carspanel()
         {
             InitializeComponent();
-        }
-
-        private void btnSave_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

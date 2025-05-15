@@ -8,7 +8,16 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Addpage">
 
-    <Grid>
+    <!--<Grid>
         
+    <Grid Background="#FF8EA542">
+        <Button x:Name="btnSave" Content="Сохранить" HorizontalAlignment="Left" Margin="289,157,0,0" VerticalAlignment="Top" Click="btnSave_Click"/>
+        <ComboBox x:Name="txtAuthorName"  SelectedIndex="{Binding id_car}" HorizontalAlignment="Left" Margin="316,53,0,0" VerticalAlignment="Top" Width="120" />
+        <TextBlock HorizontalAlignment="Left" Margin="316,32,0,0" TextWrapping="Wrap" Text="машина" VerticalAlignment="Top"/>
+        <ComboBox x:Name="txtCategoriesName" SelectedIndex="{Binding id_user}" HorizontalAlignment="Left" Margin="315,97,0,0" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="319,76,0,0" TextWrapping="Wrap" Text="пользователь" VerticalAlignment="Top"/>
+        <Button Content="Вернуться назад" HorizontalAlignment="Left" Margin="375,157,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+
     </Grid>
+    </Grid>-->
 </Page>

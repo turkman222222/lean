@@ -9,9 +9,9 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_car" Type="int" Nullable="false" />
-          <Property Name="id_usr" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usr" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Carss">
           <Key>
@@ -76,7 +76,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="strana" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="strana_name" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -207,7 +207,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_izbr_user">
+        <Association Name="FK_izbr_user1">
           <End Role="user" Type="Self.user" Multiplicity="1" />
           <End Role="izbr" Type="Self.izbr" Multiplicity="*" />
           <ReferentialConstraint>
@@ -279,7 +279,7 @@
             <End Role="Carss" EntitySet="Carss" />
             <End Role="izbr" EntitySet="izbr" />
           </AssociationSet>
-          <AssociationSet Name="FK_izbr_user" Association="Self.FK_izbr_user">
+          <AssociationSet Name="FK_izbr_user1" Association="Self.FK_izbr_user1">
             <End Role="user" EntitySet="user" />
             <End Role="izbr" EntitySet="izbr" />
           </AssociationSet>
@@ -297,9 +297,9 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_car" Type="Int32" Nullable="false" />
-          <Property Name="id_usr" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usr" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Carss" Relationship="Self.FK_bron_Carss" FromRole="bron" ToRole="Carss" />
           <NavigationProperty Name="Carss1" Relationship="Self.FK_bron_Carss1" FromRole="bron" ToRole="Carss" />
           <NavigationProperty Name="user" Relationship="Self.FK_bron_user" FromRole="bron" ToRole="user" />
@@ -351,7 +351,7 @@
           <Property Name="car_id" Type="Int32" Nullable="false" />
           <Property Name="user_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Carss" Relationship="Self.FK_izbr_Carss" FromRole="izbr" ToRole="Carss" />
-          <NavigationProperty Name="user" Relationship="Self.FK_izbr_user" FromRole="izbr" ToRole="user" />
+          <NavigationProperty Name="user" Relationship="Self.FK_izbr_user1" FromRole="izbr" ToRole="user" />
         </EntityType>
         <EntityType Name="Marks">
           <Key>
@@ -382,7 +382,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="strana1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="strana_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Carss" Relationship="Self.FK_Carss_strana" FromRole="strana" ToRole="Carss" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -406,7 +406,7 @@
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="rol_id" Type="Int32" />
           <NavigationProperty Name="bron" Relationship="Self.FK_bron_user" FromRole="user" ToRole="bron" />
-          <NavigationProperty Name="izbr" Relationship="Self.FK_izbr_user" FromRole="user" ToRole="izbr" />
+          <NavigationProperty Name="izbr" Relationship="Self.FK_izbr_user1" FromRole="user" ToRole="izbr" />
           <NavigationProperty Name="rol" Relationship="Self.FK_user_rol" FromRole="user" ToRole="rol" />
         </EntityType>
         <Association Name="FK_bron_Carss">
@@ -517,7 +517,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_izbr_user">
+        <Association Name="FK_izbr_user1">
           <End Role="user" Type="Self.user" Multiplicity="1" />
           <End Role="izbr" Type="Self.izbr" Multiplicity="*" />
           <ReferentialConstraint>
@@ -589,7 +589,7 @@
             <End Role="Carss" EntitySet="Carss" />
             <End Role="izbr" EntitySet="izbr" />
           </AssociationSet>
-          <AssociationSet Name="FK_izbr_user" Association="Self.FK_izbr_user">
+          <AssociationSet Name="FK_izbr_user1" Association="Self.FK_izbr_user1">
             <End Role="user" EntitySet="user" />
             <End Role="izbr" EntitySet="izbr" />
           </AssociationSet>
@@ -682,7 +682,7 @@
             <EntityTypeMapping TypeName="Model.strana">
               <MappingFragment StoreEntitySet="strana">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="strana1" ColumnName="strana" />
+                <ScalarProperty Name="strana_name" ColumnName="strana_name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

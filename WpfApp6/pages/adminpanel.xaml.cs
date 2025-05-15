@@ -26,7 +26,7 @@ namespace WpfApp6.pages
             InitializeComponent();
             InitializeComponent();
             InitializeComponent();
-            Prod.ItemsSource = AppDate.AppConnect.model2.Carss.ToList();
+            Prods.ItemsSource = AppDate.AppConnect.model2.Carss.ToList();
             filtr.Items.Add("цена");
             filtr.Items.Add("по возрастанию");
             filtr.Items.Add("по убыванию");
@@ -46,17 +46,17 @@ namespace WpfApp6.pages
        
         private void filtr_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Prod.ItemsSource = Findmarka();
+            Prods.ItemsSource = Findmarka();
         }
 
         private void vidRecept_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Prod.ItemsSource = Findmarka();
+            Prods.ItemsSource = Findmarka();
         }
 
         private void txttxt_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Prod.ItemsSource = Findmarka();
+            Prods.ItemsSource = Findmarka();
         }
         Carss[] Findmarka()
         {
@@ -90,7 +90,7 @@ namespace WpfApp6.pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (Prod.SelectedItem is Carss selectedRecipe)
+            if (Prods.SelectedItem is Carss selectedRecipe)
             {
                 AddToFavorites(selectedRecipe.id);
                 MessageBox.Show("Рецепт добавлен в избранное!");
@@ -99,8 +99,8 @@ namespace WpfApp6.pages
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            Addpage addpage = new Addpage();
-            AppFrame.frmMane2.Navigate(addpage);
+            carsadd carsadd = new carsadd();
+            AppFrame.frmMane2.Navigate(carsadd);
         }
         public void AddToFavorites(int id_user)
         {
@@ -112,6 +112,42 @@ namespace WpfApp6.pages
 
             AppConnect.model2.izbr.Add(newLikeRecipe);
             AppConnect.model2.SaveChanges();
+        }
+
+        private void Prod_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var selectedItems = Prods.SelectedItems.Cast<Carss>().ToList();
+
+            if (selectedItems.Count == 0)
+            {
+                MessageBox.Show("Пожалуйста, выберите элементы для удаления.");
+                return;
+            }
+
+            if (MessageBox.Show($"Вы точно хотите удалить следующие {selectedItems.Count} элементов?",
+                "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    AppConnect.model2.Carss.RemoveRange(selectedItems);
+                    AppConnect.model2.SaveChanges();
+                    MessageBox.Show("Данные удалены!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+            }
+        }
+
+        private void Prods_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
