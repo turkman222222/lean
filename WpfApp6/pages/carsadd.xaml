@@ -17,7 +17,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="598,10,0,0" TextWrapping="Wrap" Text="страна" VerticalAlignment="Top" RenderTransformOrigin="-4.324,8.277"/>
       
         <TextBlock HorizontalAlignment="Left" Margin="14,64,0,0" TextWrapping="Wrap" Text="цвет" VerticalAlignment="Top"/>
-        <Button Content="Вернуться назад" HorizontalAlignment="Left" Margin="423,281,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Button Content="Вернуться назад" HorizontalAlignment="Left" Margin="423,281,0,0" VerticalAlignment="Top" Click="Button_Click_1" />
         <ComboBox x:Name="txtmark"  SelectedIndex="{Binding id_marki}" HorizontalAlignment="Left" Margin="463,31,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="txtmark_SelectionChanged" />
         <TextBlock HorizontalAlignment="Left" Margin="463,10,0,0" TextWrapping="Wrap" Text="Марка" VerticalAlignment="Top"/>
         <ComboBox x:Name="txtcvet" SelectedIndex="{Binding id_cvet}" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" Width="120"/>

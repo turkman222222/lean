@@ -1,32 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WpfApp6.AppDate;
 
 namespace WpfApp6.pages
 {
-    /// <summary>
-    /// Логика взаимодействия для userpanel.xaml
-    /// </summary>
     public partial class userpanel : Page
     {
-        
         public userpanel()
         {
             InitializeComponent();
-            InitializeComponent();
-            Prod.ItemsSource = AppDate.AppConnect.model2.Carss.ToList();
+            LoadCars();
+            InitializeFilters();
+        }
+
+        private void LoadCars(bool showFavoritesOnly = false)
+        {
+            var cars = AppConnect.model2.Carss.AsQueryable();
+
+            if (showFavoritesOnly)
+            {
+                // Получаем только избранные автомобили текущего пользователя
+                var favoriteCarIds = AppConnect.model2.izbr
+                    .Where(f => f.user_id == AppConnect.id_userr)
+                    .Select(f => f.car_id)
+                    .ToList();
+
+                cars = cars.Where(c => favoriteCarIds.Contains(c.id));
+            }
+
+            Prods.ItemsSource = cars.ToList();
+        }
+
+        private void InitializeFilters()
+        {
             filtr.Items.Add("цена");
             filtr.Items.Add("по возрастанию");
             filtr.Items.Add("по убыванию");
@@ -39,84 +47,93 @@ namespace WpfApp6.pages
             {
                 vidRecept.Items.Add(item.name_marka);
             }
-
         }
 
-        private void Prod_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ShowFavorites_Click(object sender, RoutedEventArgs e)
         {
-
+            LoadCars(true); // Загружаем только избранное
         }
 
+        private void ShowAll_Click(object sender, RoutedEventArgs e)
+        {
+            LoadCars(); // Загружаем все автомобили
+        }
+
+        // Остальные методы остаются без изменений
         private void filtr_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Prod.ItemsSource = Findmarka();
+            Prods.ItemsSource = Findmarka();
         }
 
         private void vidRecept_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Prod.ItemsSource = Findmarka();
+            Prods.ItemsSource = Findmarka();
         }
 
         private void txttxt_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Prod.ItemsSource = Findmarka();
+            Prods.ItemsSource = Findmarka();
         }
-        Carss[] Findmarka()
+
+        private Carss[] Findmarka()
         {
-            var model = AppConnect.model2.Carss.ToList();
-            var suchmodel = model;
-            if (txttxt.Text != "" && model.Count > 0)
+            var query = AppConnect.model2.Carss.AsQueryable();
+
+            if (txttxt.Text != "")
             {
-                model = model.Where(x => x.model.ToLower().Contains(txttxt.Text.ToLower())).ToList();
+                query = query.Where(x => x.model.ToLower().Contains(txttxt.Text.ToLower()));
             }
+
             if (vidRecept.SelectedIndex > 0)
             {
-
-                model = model.Where(x => x.id_marki == vidRecept.SelectedIndex).ToList();
-
-
+                query = query.Where(x => x.id_marki == vidRecept.SelectedIndex);
             }
+
             if (filtr.SelectedIndex > 0)
             {
-                switch (filtr.SelectedIndex)
-                {
-                    case 1:
-                        model = model.OrderBy(x => x.price).ToList(); break;
-                    case 2:
-                        model    = model.OrderByDescending(x => x.price).ToList();
-                        break;
-                }
-
+                query = filtr.SelectedIndex == 1
+                    ? query.OrderBy(x => x.price)
+                    : query.OrderByDescending(x => x.price);
             }
-            return model.ToArray();
+
+            return query.ToArray();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            if (Prod.SelectedItem is Carss selectedRecipe)
-            {
-                //MessageBox.Show($"id_user: {id_user}");
-                AddToFavorites(selectedRecipe.id);
-                MessageBox.Show("Рецепт добавлен в избранное!");
-            }
-        }
         public void AddToFavorites(int id)
         {
-            
-            var newLikeRecipe = new izbr
+            var existingFavorite = AppConnect.model2.izbr
+                .FirstOrDefault(f => f.user_id == AppConnect.id_userr && f.car_id == id);
+
+            if (existingFavorite == null)
             {
-                user_id = AppConnect.id_userr,
-                car_id = id,
+                var newFavorite = new izbr
+                {
+                    user_id = AppConnect.id_userr,
+                    car_id = id,
+                };
+                AppConnect.model2.izbr.Add(newFavorite);
+                AppConnect.model2.SaveChanges();
+                MessageBox.Show("Машина добавлена в избранное!");
+            }
+            else
+            {
+                AppConnect.model2.izbr.Remove(existingFavorite);
+                AppConnect.model2.SaveChanges();
+                MessageBox.Show("Машина удалена из избранного!");
+            }
+        }
 
-            };
+        private void AddToFavoritesItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (((FrameworkElement)sender).DataContext is Carss selectedCar)
+            {
+                AddToFavorites(selectedCar.id);
+            }
+        }
 
-            AppConnect.model2.izbr.Add(newLikeRecipe);
-            AppConnect.model2.SaveChanges();
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            AppFrame.frmMane2.Navigate(new bronadmin());
         }
     }
 }

@@ -27,9 +27,21 @@ namespace WpfApp6.pages
         private Carss _currentCar = new Carss();
         public carsadd()
         {
-            //InitializeComponent();
-            //if (_currentCar != null)
-            //    this._currentCar = currentCar;
+            InitializeComponent();
+            Loadmark();
+            Loadcveta();
+            Loadsalona();
+            Loadkompl();
+            Loadatrana();
+            DataContext = _currentCar;
+
+
+        }
+        public carsadd(Carss selectedRecipe)
+        {
+            InitializeComponent(); // THIS IS CRUCIAL - UNCOMMENT THIS LINE
+            if (_currentCar != null)
+                this._currentCar = selectedRecipe;
             DataContext = _currentCar;
 
             Loadmark();
@@ -38,20 +50,20 @@ namespace WpfApp6.pages
             Loadkompl();
             Loadatrana();
 
-           
+
 
         }
         private void Loadmark()
         {
+            if (txtmark == null) return;
+
+            txtmark.Items.Clear();
             var authors = AppConnect.model2.Marks;
             txtmark.Items.Add("марки");
             foreach (var auth in authors)
             {
                 txtmark.Items.Add(auth.name_marka);
             }
-
-            //txtmark.ItemsSource = authors;
-            //txtmark.DisplayMemberPath = "name_marka";
         }
         private void Loadatrana()
         {
@@ -145,38 +157,62 @@ namespace WpfApp6.pages
             }
         }
         private void Button_Click(object sender, RoutedEventArgs e)
+{
+    var dialog = new OpenFileDialog
+    {
+        Filter = "Image files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg",
+        Title = "Выберите изображение",
+        Multiselect = false
+    };
+
+    if (dialog.ShowDialog() == true)
+    {
+        try
         {
-            var dialog = new OpenFileDialog
+            // Ограничение размера файла (например, 5MB)
+            FileInfo fileInfo = new FileInfo(dialog.FileName);
+            if (fileInfo.Length > 5 * 1024 * 1024)
             {
-                Filter = "Image files (*.png;*.jpg)|*.png;*.jpg",
-                Title = "Выберите изображение"
-            };
-
-            if (dialog.ShowDialog() == true)
-            {
-                try
-                {
-                    byte[] imageData;
-                    using (FileStream fileStream = new FileStream(dialog.FileName, FileMode.Open, FileAccess.Read))
-                    {
-                        using (MemoryStream memoryStream = new MemoryStream())
-                        {
-                            fileStream.CopyTo(memoryStream);
-                            imageData = memoryStream.ToArray(); // Преобразуем в массив байтов
-                        }
-                    }
-
-                    // Сохраняем массив байтов в объект Carss
-                    _currentCar.image = imageData; // Используем новое имя свойства
-
-                    MessageBox.Show("Изображение успешно добавлено!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Ошибка при загрузке файла: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                MessageBox.Show("Размер файла не должен превышать 5MB", "Ошибка", 
+                              MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
+
+            // Чтение файла
+            byte[] imageData;
+            using (FileStream fileStream = new FileStream(dialog.FileName, FileMode.Open, FileAccess.Read))
+            {
+                imageData = new byte[fileStream.Length];
+                fileStream.Read(imageData, 0, (int)fileStream.Length);
+            }
+
+            // Сохранение в объект
+            _currentCar.image = imageData;
+
+            // Предпросмотр изображения (опционально)
+            if (imageData != null && imageData.Length > 0)
+            {
+                var bitmapImage = new BitmapImage();
+                using (var memStream = new MemoryStream(imageData))
+                {
+                    bitmapImage.BeginInit();
+                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmapImage.StreamSource = memStream;
+                    bitmapImage.EndInit();
+                }
+                // imgPreview - это Image control в XAML
+            }
+
+            MessageBox.Show("Изображение успешно загружено!", "Успех", 
+                          MessageBoxButton.OK, MessageBoxImage.Information);
         }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Ошибка при загрузке изображения:\n{ex.Message}", "Ошибка", 
+                          MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+}
 
         private void txtCategoriesName_Копировать4_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -185,34 +221,84 @@ namespace WpfApp6.pages
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
+            try
+            {
+                if (_currentCar == null)
+                {
+                    MessageBox.Show("Ошибка: текущий автомобиль не инициализирован");
+                    return;
+                }
 
-            //    if (_currentCar.id == 0)
-            //    {
-            //        _currentCar.id_marki = AppConnect.model2.Marks.FirstOrDefault(x => x.name_marka  == txtmark.Text).id;
-                   
-            //        _currentCar.id_str = AppConnect.model2.strana.FirstOrDefault(x => x.strana_name == txtstrana.Text).id;
-            //        _currentCar.id_cvet = AppConnect.model2.cveta.FirstOrDefault(x => x.cvet_name == txtcvet.Text).id;
-            //        _currentCar.id_kompl = AppConnect.model2.compl.FirstOrDefault(x => x.kompl_name  == txtkompl.Text).id;
-            //        _currentCar.id_salona = AppConnect.model2.salonch.FirstOrDefault(x => x.salon == txtsalon.Text).id;
+                // Получаем ID связанных сущностей с проверкой на null
+                var mark = AppConnect.model2.Marks.FirstOrDefault(x => x.name_marka == txtmark.Text);
+                if (mark == null)
+                {
+                    MessageBox.Show("Марка не найдена!");
+                    return;
+                }
+                _currentCar.id_marki = mark.id;
 
+                var country = AppConnect.model2.strana.FirstOrDefault(x => x.strana_name == txtstrana.Text);
+                if (country == null)
+                {
+                    MessageBox.Show("Страна не найдена!");
+                    return;
+                }
+                _currentCar.id_str = country.id;
 
-            //        AppConnect.model2.Carss.Add(_currentCar);
-            //    }
+                var color = AppConnect.model2.cveta.FirstOrDefault(x => x.cvet_name == txtcvet.Text);
+                if (color == null)
+                {
+                    MessageBox.Show("Цвет не найден!");
+                    return;
+                }
+                _currentCar.id_cvet = color.id;
 
-            //    AppConnect.model2.SaveChanges();
-            //    //this.Close();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
+                var complectation = AppConnect.model2.compl.FirstOrDefault(x => x.kompl_name == txtkompl.Text);
+                if (complectation == null)
+                {
+                    MessageBox.Show("Комплектация не найдена!");
+                    return;
+                }
+                _currentCar.id_kompl = complectation.id;
+
+                var salon = AppConnect.model2.salonch.FirstOrDefault(x => x.salon == txtsalon.Text);
+                if (salon == null)
+                {
+                    MessageBox.Show("Салон не найден!");
+                    return;
+                }
+                _currentCar.id_salona = salon.id;
+
+                // Добавляем новую запись только если id == 0
+                if (_currentCar.id == 0)
+                {
+                    AppConnect.model2.Carss.Add(_currentCar);
+                    MessageBox.Show("Данные добавлены.");
+                }
+                else
+                {
+                    MessageBox.Show("Данные обновлены.");
+                }
+
+                // Сохраняем изменения
+                AppConnect.model2.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}\n\nInner Exception: {ex.InnerException?.Message}");
+            }
         }
 
         private void txtmark_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            adminpanel adm = new adminpanel();
+            NavigationService.Navigate(adm);
         }
     }
 }

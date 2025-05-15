@@ -16,17 +16,12 @@ using WpfApp6.AppDate;
 
 namespace WpfApp6.pages
 {
-    /// <summary>
-    /// Логика взаимодействия для adminpanel.xaml
-    /// </summary>
     public partial class adminpanel : Page
     {
         public adminpanel()
         {
             InitializeComponent();
-            InitializeComponent();
-            InitializeComponent();
-            Prods.ItemsSource = AppDate.AppConnect.model2.Carss.ToList();
+            Prods.ItemsSource = AppConnect.model2.Carss.ToList();
             filtr.Items.Add("цена");
             filtr.Items.Add("по возрастанию");
             filtr.Items.Add("по убыванию");
@@ -41,9 +36,47 @@ namespace WpfApp6.pages
             }
         }
 
-        
+        private void AddToFavoritesItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (((FrameworkElement)sender).DataContext is Carss selectedCar)
+            {
+                AddToFavorites(selectedCar.id);
+                MessageBox.Show("Машина добавлена в избранное!");
+            }
+        }
 
-       
+        private void EditItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (((FrameworkElement)sender).DataContext is Carss selectedCar)
+            {
+                carsadd editPage = new carsadd(selectedCar);
+                AppFrame.frmMane2.Navigate(editPage);
+            }
+        }
+
+        private void DeleteItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (((FrameworkElement)sender).DataContext is Carss selectedCar)
+            {
+                if (MessageBox.Show($"Вы точно хотите удалить автомобиль {selectedCar.model}?",
+                    "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    try
+                    {
+                        AppConnect.model2.Carss.Remove(selectedCar);
+                        AppConnect.model2.SaveChanges();
+                        MessageBox.Show("Автомобиль удален!");
+                        Prods.ItemsSource = AppConnect.model2.Carss.ToList();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message.ToString());
+                    }
+                }
+            }
+        }
+
+        // Остальной код остается без изменений
         private void filtr_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Prods.ItemsSource = Findmarka();
@@ -58,6 +91,7 @@ namespace WpfApp6.pages
         {
             Prods.ItemsSource = Findmarka();
         }
+
         Carss[] Findmarka()
         {
             var model = AppConnect.model2.Carss.ToList();
@@ -68,10 +102,7 @@ namespace WpfApp6.pages
             }
             if (vidRecept.SelectedIndex > 0)
             {
-
                 model = model.Where(x => x.id_marki == vidRecept.SelectedIndex).ToList();
-
-
             }
             if (filtr.SelectedIndex > 0)
             {
@@ -83,43 +114,38 @@ namespace WpfApp6.pages
                         model = model.OrderByDescending(x => x.price).ToList();
                         break;
                 }
-
             }
             return model.ToArray();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (Prods.SelectedItem is Carss selectedRecipe)
-            {
-                AddToFavorites(selectedRecipe.id);
-                MessageBox.Show("Рецепт добавлен в избранное!");
-            }
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            carsadd carsadd = new carsadd();
-            AppFrame.frmMane2.Navigate(carsadd);
-        }
-        public void AddToFavorites(int id_user)
+        public void AddToFavorites(int id)
         {
             var newLikeRecipe = new izbr
             {
                 user_id = AppConnect.id_userr,
-                id = id_user,
+                car_id = id,
             };
 
             AppConnect.model2.izbr.Add(newLikeRecipe);
             AppConnect.model2.SaveChanges();
         }
 
-        private void Prod_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-
+            if (Prods.SelectedItem is Carss selectedRecipe)
+            {
+                AddToFavorites(selectedRecipe.id);
+                MessageBox.Show("машина добавлена в избранное!");
+            }
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            carsadd addpagedd = new carsadd();
+            AppFrame.frmMane2.Navigate(addpagedd);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             var selectedItems = Prods.SelectedItems.Cast<Carss>().ToList();
 
@@ -137,6 +163,7 @@ namespace WpfApp6.pages
                     AppConnect.model2.Carss.RemoveRange(selectedItems);
                     AppConnect.model2.SaveChanges();
                     MessageBox.Show("Данные удалены!");
+                    Prods.ItemsSource = AppConnect.model2.Carss.ToList();
                 }
                 catch (Exception ex)
                 {
@@ -145,10 +172,38 @@ namespace WpfApp6.pages
             }
         }
 
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            if (Prods.SelectedItem is Carss selectedRecipe)
+            {
+                carsadd editPage = new carsadd(selectedRecipe);
+                if (Prods.SelectedItem != null)
+                {
+                    AppFrame.frmMane2.Navigate(editPage);
+                }
+                else
+                {
+                    MessageBox.Show("Выберите автомобиль для редактирования!", "Ошибка",
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            putadmin addpagedddd = new putadmin();
+            AppFrame.frmMane2.Navigate(addpagedddd);
+        }
+
         private void Prods_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Ваш код обработки изменения выбора
+        }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            bronadmin addpageddddff = new bronadmin();
+            AppFrame.frmMane2.Navigate(addpageddddff);
         }
     }
 }
-

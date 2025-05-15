@@ -16,7 +16,7 @@ namespace WpfApp6.AppDate
     public partial class Entities2 : DbContext
     {
         public Entities2()
-            : base("name=Entities2")
+            : base("name=Entities5")
         {
         }
     
@@ -34,7 +34,6 @@ namespace WpfApp6.AppDate
         public virtual DbSet<rol> rol { get; set; }
         public virtual DbSet<salonch> salonch { get; set; }
         public virtual DbSet<strana> strana { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<user> user { get; set; }
     }
 }
