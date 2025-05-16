@@ -80,7 +80,7 @@
 
                 <Button x:Name="btnmarka" Content="Марки" 
                         Style="{StaticResource MenuButtonStyle}" 
-                        Click="Button_Click"/>
+                        Click="Button_Click4"/>
 
                 <Button x:Name="btncvet" Content="Цвета" 
                         Style="{StaticResource MenuButtonStyle}" 

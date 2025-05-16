@@ -53,5 +53,12 @@ namespace WpfApp6.pages
         {
             // Пустой метод, как в исходном коде
         }
+
+        private void Button_Click4(object sender, RoutedEventArgs e)
+        {
+            cveta cveta = new cveta();
+            NavigationService.Navigate(cveta);
+
+        }
     }
 }

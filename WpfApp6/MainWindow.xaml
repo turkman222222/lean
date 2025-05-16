@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp6"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Автослан василек" Height="450" Width="800" Icon="/172580_cars_icon.png">
     <Grid >
         <Frame x:Name="frmMane" Content="Frame" NavigationUIVisibility="Hidden" Background="Black"/>
 
