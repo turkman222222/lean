@@ -79,12 +79,12 @@
                         Click="btncar_Click_1"/>
 
                 <Button x:Name="btnmarka" Content="Марки" 
-                        Style="{StaticResource MenuButtonStyle}" 
-                        Click="Button_Click4"/>
+                        Style="{StaticResource MenuButtonStyle}" Click="btnmarka_Click" 
+                      />
 
                 <Button x:Name="btncvet" Content="Цвета" 
                         Style="{StaticResource MenuButtonStyle}" 
-                        Click="Button_Click"/>
+                        Click="Button_Click1"/>
 
                 <Button x:Name="btncompl" Content="Комплектации" 
                         Style="{StaticResource MenuButtonStyle}" 
@@ -106,7 +106,7 @@
 
                 <Button x:Name="btnstrana" Content="Страны" 
                         Style="{StaticResource MenuButtonStyle}" 
-                        Click="Button_Click"/>
+                        Click="Button_Click10"/>
 
                 <Button x:Name="btnrol" Content="Роли" 
                         Style="{StaticResource MenuButtonStyle}" 
@@ -114,11 +114,7 @@
 
                 <Button x:Name="btnuser" Content="Пользователи" 
                         Style="{StaticResource MenuButtonStyle}" 
-                        Click="Button_Click"/>
-
-                <Button x:Name="btnizbr" Content="Избранное" 
-                        Style="{StaticResource MenuButtonStyle}" 
-                        Click="Button_Click"/>
+                        Click="Button_Click11"/>
             </StackPanel>
         </Border>
 

@@ -1,209 +1,123 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WpfApp6.AppDate;
 
 namespace WpfApp6.pages
 {
-    /// <summary>
-    /// Логика взаимодействия для cveta.xaml
-    /// </summary>
     public partial class cveta : Page
     {
         public cveta()
         {
             InitializeComponent();
-            InitializeComponent();
-            Prods.ItemsSource = AppConnect.model2.Carss.ToList();
-            filtr.Items.Add("цена");
-            filtr.Items.Add("по возрастанию");
-            filtr.Items.Add("по убыванию");
-            filtr.SelectedIndex = 0;
+            Prods.ItemsSource = AppConnect.model2.cveta.ToList();
 
-            vidRecept.SelectedIndex = 0;
-            var marki = AppConnect.model2.Marks;
-            vidRecept.Items.Add("Категория");
-            foreach (var item in marki)
-            {
-                vidRecept.Items.Add(item.name_marka);
-            }
         }
+
+
 
         private void AddToFavoritesItem_Click(object sender, RoutedEventArgs e)
         {
-            if (((FrameworkElement)sender).DataContext is Carss selectedCar)
+            if (((FrameworkElement)sender).DataContext is AppDate.cveta selectedColor)
             {
-                AddToFavorites(selectedCar.id);
-                MessageBox.Show("Машина добавлена в избранное!");
+                // Логика добавления цвета в избранное, если нужно
+                MessageBox.Show($"Цвет {selectedColor.cvet_name} добавлен в избранное!");
             }
         }
 
-       
-
-        
-
-        // Остальной код остается без изменений
-        private void filtr_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void EditItem_Click(object sender, RoutedEventArgs e)
         {
-            Prods.ItemsSource = Findmarka();
-        }
-
-        private void vidRecept_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Prods.ItemsSource = Findmarka();
-        }
-
-        private void txttxt_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Prods.ItemsSource = Findmarka();
-        }
-
-        Carss[] Findmarka()
-        {
-            var model = AppConnect.model2.Carss.ToList();
-            var suchmodel = model;
-            if (txttxt.Text != "" && model.Count > 0)
+            if (((FrameworkElement)sender).DataContext is AppDate.cveta selectedColor)
             {
-                model = model.Where(x => x.model.ToLower().Contains(txttxt.Text.ToLower())).ToList();
+                // Переход на страницу редактирования цвета
+                cvetaEditPage editPage = new cvetaEditPage(selectedColor);
+                AppFrame.frmMane2.Navigate(editPage);
             }
-            if (vidRecept.SelectedIndex > 0)
+        }
+
+        private void DeleteItem_Click(object sender, RoutedEventArgs e)
+        {
+            if (((FrameworkElement)sender).DataContext is AppDate.cveta selectedColor)
             {
-                model = model.Where(x => x.id_marki == vidRecept.SelectedIndex).ToList();
-            }
-            if (filtr.SelectedIndex > 0)
-            {
-                switch (filtr.SelectedIndex)
+                if (MessageBox.Show($"Вы точно хотите удалить цвет {selectedColor.cvet_name}?",
+                    "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    case 1:
-                        model = model.OrderBy(x => x.price).ToList(); break;
-                    case 2:
-                        model = model.OrderByDescending(x => x.price).ToList();
-                        break;
+                    try
+                    {
+                        // Проверка на связанные автомобили
+                        if (selectedColor.Carss.Any())
+                        {
+                            MessageBox.Show("Нельзя удалить цвет, так как есть автомобили с этим цветом!",
+                                "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                            return;
+                        }
+
+                        AppConnect.model2.cveta.Remove(selectedColor);
+                        AppConnect.model2.SaveChanges();
+                        MessageBox.Show("Цвет удален!");
+                        Prods.ItemsSource = AppConnect.model2.cveta.ToList();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Ошибка при удалении: {ex.Message}");
+                    }
                 }
             }
-            return model.ToArray();
         }
 
-        public void AddToFavorites(int id)
+        private void Button_Add_Click(object sender, RoutedEventArgs e)
         {
-            var newLikeRecipe = new izbr
-            {
-                user_id = AppConnect.id_userr,
-                car_id = id,
-            };
-
-            AppConnect.model2.izbr.Add(newLikeRecipe);
-            AppConnect.model2.SaveChanges();
+            // Переход на страницу добавления нового цвета
+            cvetaEditPage addPage = new cvetaEditPage();
+            AppFrame.frmMane2.Navigate(addPage);
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
+        private void Button_Back_Click(object sender, RoutedEventArgs e)
         {
-            if (Prods.SelectedItem is Carss selectedRecipe)
+            // Возврат на предыдущую страницу
+            AppFrame.frmMane2.GoBack();
+        }
+
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var colors = AppConnect.model2.cveta.ToList();
+
+            if (!string.IsNullOrEmpty(txtSearch.Text))
             {
-                AddToFavorites(selectedRecipe.id);
-                MessageBox.Show("машина добавлена в избранное!");
+                colors = colors.Where(x => x.cvet_name.ToLower().Contains(txtSearch.Text.ToLower())).ToList();
             }
+
+            Prods.ItemsSource = colors;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            putadmin putadmin = new putadmin();
+            AppFrame.frmMane2.Navigate(putadmin);
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            carsadd addpagedd = new carsadd();
-            AppFrame.frmMane2.Navigate(addpagedd);
+            cvetaEditPage editPage = new cvetaEditPage();
+            AppFrame.frmMane2.Navigate(editPage);
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void txtSearch_TextChanged_1(object sender, TextChangedEventArgs e)
         {
-            var selectedItems = Prods.SelectedItems.Cast<Carss>().ToList();
+            var colors = AppConnect.model2.cveta.ToList();
 
-            if (selectedItems.Count == 0)
+            if (!string.IsNullOrEmpty(txtSearch.Text))
             {
-                MessageBox.Show("Пожалуйста, выберите элементы для удаления.");
-                return;
+                colors = colors.Where(x => x.cvet_name.ToLower().Contains(txtSearch.Text.ToLower())).ToList();
             }
 
-            if (MessageBox.Show($"Вы точно хотите удалить следующие {selectedItems.Count} элементов?",
-                "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-            {
-                try
-                {
-                    AppConnect.model2.Carss.RemoveRange(selectedItems);
-                    AppConnect.model2.SaveChanges();
-                    MessageBox.Show("Данные удалены!");
-                    Prods.ItemsSource = AppConnect.model2.Carss.ToList();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message.ToString());
-                }
-            }
+            Prods.ItemsSource = colors;
         }
-
-       
-
-        private void Button_Click_5(object sender, RoutedEventArgs e)
-        {
-            putadmin addpagedddd = new putadmin();
-            AppFrame.frmMane2.Navigate(addpagedddd);
-        }
-
-        private void Prods_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // Ваш код обработки изменения выбора
-        }
-        private void DeleteItem_Click (object sender, RoutedEventArgs e)
-        {
-            var selectedItems = Prods.SelectedItems.Cast<Carss>().ToList();
-
-            if (selectedItems.Count == 0)
-            {
-                MessageBox.Show("Пожалуйста, выберите элементы для удаления.");
-                return;
-            }
-
-            if (MessageBox.Show($"Вы точно хотите удалить следующие {selectedItems.Count} элементов?",
-                "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-            {
-                try
-                {
-                    AppConnect.model2.Carss.RemoveRange(selectedItems);
-                    AppConnect.model2.SaveChanges();
-                    MessageBox.Show("Данные удалены!");
-                    Prods.ItemsSource = AppConnect.model2.Carss.ToList();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message.ToString());
-                }
-            }
-        }
-
-        private void EditItem_Click (object sender, RoutedEventArgs e)
-        {
-            if (Prods.SelectedItem is Carss selectedRecipe)
-            {
-                carsadd editPage = new carsadd(selectedRecipe);
-                if (Prods.SelectedItem != null)
-                {
-                    AppFrame.frmMane2.Navigate(editPage);
-                }
-                else
-                {
-                    MessageBox.Show("Выберите автомобиль для редактирования!", "Ошибка",
-                        MessageBoxButton.OK, MessageBoxImage.Warning);
-                }
-            }
-        }
-
     }
 }

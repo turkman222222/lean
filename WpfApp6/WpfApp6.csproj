@@ -112,9 +112,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Converters\ByteArrayToImageConverter.cs" />
-    <Compile Include="pages\Addpage.xaml.cs">
-      <DependentUpon>Addpage.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Converters\ZeroToCollapsedConverter.cs" />
     <Compile Include="pages\bronadmin.xaml.cs">
       <DependentUpon>bronadmin.xaml</DependentUpon>
     </Compile>
@@ -124,11 +122,50 @@
     <Compile Include="pages\carspanel.xaml.cs">
       <DependentUpon>carspanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="pages\ComplEditPage.xaml.cs">
+      <DependentUpon>ComplEditPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\ComplPage.xaml.cs">
+      <DependentUpon>ComplPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pages\cveta.xaml.cs">
       <DependentUpon>cveta.xaml</DependentUpon>
     </Compile>
+    <Compile Include="pages\cvetaEditPage.xaml.cs">
+      <DependentUpon>cvetaEditPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\MarkEditPage.xaml.cs">
+      <DependentUpon>MarkEditPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\MarksPage.xaml.cs">
+      <DependentUpon>MarksPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pages\putadmin.xaml.cs">
       <DependentUpon>putadmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\RolEditPage.xaml.cs">
+      <DependentUpon>RolEditPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\RolPage.xaml.cs">
+      <DependentUpon>RolPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\SalonEditPage.xaml.cs">
+      <DependentUpon>SalonEditPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\SalonPage.xaml.cs">
+      <DependentUpon>SalonPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\StranaEditPage.xaml.cs">
+      <DependentUpon>StranaEditPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\StranaPage.xaml.cs">
+      <DependentUpon>StranaPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\UserEditPage.xaml.cs">
+      <DependentUpon>UserEditPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="pages\UserPage.xaml.cs">
+      <DependentUpon>UserPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="_10241367DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -147,10 +184,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="pages\Addpage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="pages\adminpanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -171,7 +204,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="pages\ComplEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\ComplPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="pages\cveta.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\cvetaEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\MarkEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\MarksPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -180,6 +233,38 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="pages\reg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\RolEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\RolPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\SalonEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\SalonPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\StranaEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\StranaPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\UserEditPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\UserPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

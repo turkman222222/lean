@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp6.AppDate;
 
 namespace WpfApp6.pages
 {
@@ -27,14 +28,15 @@ namespace WpfApp6.pages
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            bronadmin bronadmin = new bronadmin();
-            NavigationService.Navigate(bronadmin);
+            RolPage RolPage = new RolPage();
+            NavigationService.Navigate(RolPage);
         }
 
         private void btncar_Click_1(object sender, RoutedEventArgs e)
         {
-            adminpanel adminpanel = new adminpanel();
-            NavigationService.Navigate(adminpanel);
+            adminpanel cvetaff = new adminpanel();
+            NavigationService.Navigate(cvetaff);
+
         }
 
         private void buttonbron_Click(object sender, RoutedEventArgs e)
@@ -45,7 +47,7 @@ namespace WpfApp6.pages
 
         private void btnsalon_Click(object sender, RoutedEventArgs e)
         {
-            Addpage salonnadmin = new Addpage();
+            SalonPage salonnadmin = new SalonPage();
             NavigationService.Navigate(salonnadmin);
         }
 
@@ -54,11 +56,34 @@ namespace WpfApp6.pages
             // Пустой метод, как в исходном коде
         }
 
-        private void Button_Click4(object sender, RoutedEventArgs e)
+        private void Button_Click1(object sender, RoutedEventArgs e)
         {
             cveta cveta = new cveta();
             NavigationService.Navigate(cveta);
 
+        }
+
+        private void Button_Click4(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnmarka_Click(object sender, RoutedEventArgs e)
+        {
+            MarksPage MarksPage = new MarksPage();
+            NavigationService.Navigate(MarksPage);
+        }
+
+        private void Button_Click10(object sender, RoutedEventArgs e)
+        {
+            StranaPage StranaPage = new StranaPage();
+            NavigationService.Navigate(StranaPage);
+        }
+
+        private void Button_Click11(object sender, RoutedEventArgs e)
+        {
+            UserPage UserPage = new UserPage();
+            NavigationService.Navigate(UserPage);
         }
     }
 }

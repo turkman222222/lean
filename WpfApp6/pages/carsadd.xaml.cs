@@ -219,7 +219,7 @@ namespace WpfApp6.pages
 
         }
 
-        private void btnSave_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -295,10 +295,81 @@ namespace WpfApp6.pages
 
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            adminpanel adm = new adminpanel();
-            NavigationService.Navigate(adm);
+            try
+            {
+                if (_currentCar == null)
+                {
+                    MessageBox.Show("Ошибка: текущий автомобиль не инициализирован");
+                    return;
+                }
+
+                // Получаем ID связанных сущностей с проверкой на null
+                var mark = AppConnect.model2.Marks.FirstOrDefault(x => x.name_marka == txtmark.Text);
+                if (mark == null)
+                {
+                    MessageBox.Show("Марка не найдена!");
+                    return;
+                }
+                _currentCar.id_marki = mark.id;
+
+                var country = AppConnect.model2.strana.FirstOrDefault(x => x.strana_name == txtstrana.Text);
+                if (country == null)
+                {
+                    MessageBox.Show("Страна не найдена!");
+                    return;
+                }
+                _currentCar.id_str = country.id;
+
+                var color = AppConnect.model2.cveta.FirstOrDefault(x => x.cvet_name == txtcvet.Text);
+                if (color == null)
+                {
+                    MessageBox.Show("Цвет не найден!");
+                    return;
+                }
+                _currentCar.id_cvet = color.id;
+
+                var complectation = AppConnect.model2.compl.FirstOrDefault(x => x.kompl_name == txtkompl.Text);
+                if (complectation == null)
+                {
+                    MessageBox.Show("Комплектация не найдена!");
+                    return;
+                }
+                _currentCar.id_kompl = complectation.id;
+
+                var salon = AppConnect.model2.salonch.FirstOrDefault(x => x.salon == txtsalon.Text);
+                if (salon == null)
+                {
+                    MessageBox.Show("Салон не найден!");
+                    return;
+                }
+                _currentCar.id_salona = salon.id;
+
+                // Добавляем новую запись только если id == 0
+                if (_currentCar.id == 0)
+                {
+                    AppConnect.model2.Carss.Add(_currentCar);
+                    MessageBox.Show("Данные добавлены.");
+                }
+                else
+                {
+                    MessageBox.Show("Данные обновлены.");
+                }
+
+                // Сохраняем изменения
+                AppConnect.model2.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}\n\nInner Exception: {ex.InnerException?.Message}");
+            }
         }
+
+        //private void Button_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    adminpanel adm = new adminpanel();
+        //    NavigationService.Navigate(adm);
+        //}
     }
 }

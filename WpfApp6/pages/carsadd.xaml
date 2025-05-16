@@ -5,30 +5,119 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfApp6.pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="carsadd">
-    <Grid Background="#FF8EA542">
-        <Button x:Name="btnSave" Content="Сохранить" HorizontalAlignment="Left" Margin="337,281,0,0" VerticalAlignment="Top" Click="btnSave_Click" />
-        <ComboBox x:Name="txtstrana"  SelectedIndex="{Binding id_str}" HorizontalAlignment="Left" Margin="595,31,0,0" VerticalAlignment="Top" Width="120" />
-        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding model}" VerticalAlignment="Top" Width="202" Height="23" Margin="6,31,0,0"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="модель" VerticalAlignment="Top" RenderTransformOrigin="0.312,-2.876" Width="60" />
-        <TextBox x:Name="god" Text="{Binding god_poiz}"  HorizontalAlignment="Left" Margin="225,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="226" Height="23" TextChanged="text03_TextChanged"/>
-        <TextBlock HorizontalAlignment="Left" Margin="225,10,0,0" TextWrapping="Wrap" Text="год производства" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="598,10,0,0" TextWrapping="Wrap" Text="страна" VerticalAlignment="Top" RenderTransformOrigin="-4.324,8.277"/>
-      
-        <TextBlock HorizontalAlignment="Left" Margin="14,64,0,0" TextWrapping="Wrap" Text="цвет" VerticalAlignment="Top"/>
-        <Button Content="Вернуться назад" HorizontalAlignment="Left" Margin="423,281,0,0" VerticalAlignment="Top" Click="Button_Click_1" />
-        <ComboBox x:Name="txtmark"  SelectedIndex="{Binding id_marki}" HorizontalAlignment="Left" Margin="463,31,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="txtmark_SelectionChanged" />
-        <TextBlock HorizontalAlignment="Left" Margin="463,10,0,0" TextWrapping="Wrap" Text="Марка" VerticalAlignment="Top"/>
-        <ComboBox x:Name="txtcvet" SelectedIndex="{Binding id_cvet}" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="txtsalon" SelectedIndex="{Binding  id_salona}" HorizontalAlignment="Left" Margin="154,85,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBlock HorizontalAlignment="Left" Margin="158,64,0,0" TextWrapping="Wrap" Text="салон" VerticalAlignment="Top"/>
-      
-        <TextBlock HorizontalAlignment="Left" Margin="296,64,0,0" TextWrapping="Wrap" Text="Коплектация" VerticalAlignment="Top"/>
-        <ComboBox x:Name="txtkompl" SelectedIndex="{Binding id_kompl}" HorizontalAlignment="Left" Margin="292,85,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="txtCategoriesName_Копировать4_SelectionChanged"/>
-        <Button x:Name="foto" Content="фото" HorizontalAlignment="Left" Margin="439,85,0,0" VerticalAlignment="Top" Height="22" Width="31" Click="Button_Click"/>
-        <TextBox HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding price}" VerticalAlignment="Top" Width="202" Height="23" Margin="498,85,0,0" />
-        <TextBlock HorizontalAlignment="Left" Margin="502,64,0,0" TextWrapping="Wrap" Text="цена" VerticalAlignment="Top" RenderTransformOrigin="0.312,-2.876" Width="60" />
+      d:DesignHeight="500" d:DesignWidth="800"
+      Title="Добавление автомобиля"
+      Background="#FFF5F5F5">
 
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0 0 0 5"/>
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0 0 0 15"/>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0 0 0 15"/>
+        </Style>
+
+        <Style TargetType="Button">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="Background" Value="#FF3F51B5"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="10 0 0 0"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Grid.ColumnSpan="2" Text="Добавление нового автомобиля" 
+                   FontSize="20" FontWeight="Bold" Margin="0 0 0 20"
+                   HorizontalAlignment="Center"/>
+
+        <!-- Левая колонка -->
+        <StackPanel Grid.Row="1" Grid.Column="0" Margin="0 0 10 0">
+            <TextBlock Text="Модель"/>
+            <TextBox Text="{Binding model}"/>
+
+            <TextBlock Text="Год производства"/>
+            <TextBox x:Name="god" Text="{Binding god_poiz}" TextChanged="text03_TextChanged"/>
+
+            <TextBlock Text="Марка"/>
+            <ComboBox x:Name="txtmark" SelectedIndex="{Binding id_marki}" 
+                      SelectionChanged="txtmark_SelectionChanged"/>
+        </StackPanel>
+
+        <!-- Правая колонка -->
+        <StackPanel Grid.Row="1" Grid.Column="1" Margin="10 0 0 0">
+            <TextBlock Text="Страна"/>
+            <ComboBox x:Name="txtstrana" SelectedIndex="{Binding id_str}"/>
+
+            <TextBlock Text="Цена"/>
+            <TextBox Text="{Binding price}"/>
+
+            <TextBlock Text="Салон"/>
+            <ComboBox x:Name="txtsalon" SelectedIndex="{Binding id_salona}"/>
+        </StackPanel>
+
+        <!-- Нижняя часть - цвет и комплектация -->
+        <StackPanel Grid.Row="2" Grid.Column="0" Margin="0 0 10 0">
+            <TextBlock Text="Цвет"/>
+            <ComboBox x:Name="txtcvet" SelectedIndex="{Binding id_cvet}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1" Margin="10 0 0 0">
+            <TextBlock Text="Комплектация"/>
+            <ComboBox x:Name="txtkompl" SelectedIndex="{Binding id_kompl}" 
+                      SelectionChanged="txtCategoriesName_Копировать4_SelectionChanged"/>
+        </StackPanel>
+
+        <!-- Кнопка добавления фото -->
+        <Button x:Name="foto" Grid.Row="3" Grid.ColumnSpan="2" 
+                Content="Добавить фото" HorizontalAlignment="Left"
+                Width="120" Click="Button_Click" Margin="0 10 0 20"/>
+
+        <!-- Кнопки действий -->
+        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" 
+                    HorizontalAlignment="Right" Margin="0 20 0 0">
+            <Button x:Name="btnSave" Content="Сохранить" Click="btnSave_Click" 
+                    Background="#4CAF50" Width="120"/>
+
+            <Button Content="Отмена" Click="Button_Click_1" 
+                    Background="#F44336" Width="120"/>
+        </StackPanel>
     </Grid>
 </Page>
