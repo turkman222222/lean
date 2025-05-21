@@ -21,6 +21,7 @@
                 <Setter Property="FontSize" Value="14"/>
                 <Setter Property="FontWeight" Value="Medium"/>
                 <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                <Setter Property="Cursor" Value="Hand"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
@@ -50,6 +51,15 @@
                 <Setter Property="BorderThickness" Value="0,0,0,2"/>
                 <Setter Property="BorderBrush" Value="#1976D2"/>
             </Style>
+
+            <!-- Стиль для заголовков групп -->
+            <Style TargetType="TextBlock" x:Key="GroupHeaderStyle">
+                <Setter Property="Margin" Value="15,20,15,5"/>
+                <Setter Property="Foreground" Value="#757575"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+                
+            </Style>
         </Grid.Resources>
 
         <Grid.ColumnDefinitions>
@@ -69,18 +79,15 @@
                 </Border>
 
                 <!-- Группа автомобилей -->
-                <TextBlock Text="Автомобили" 
-                           Margin="15,20,15,5"
-                           Foreground="#757575"
-                           FontSize="12"/>
+                <TextBlock Text="Автомобили" Style="{StaticResource GroupHeaderStyle}"/>
 
                 <Button x:Name="btncar" Content="Все автомобили" 
                         Style="{StaticResource MenuButtonStyle}" 
                         Click="btncar_Click_1"/>
 
                 <Button x:Name="btnmarka" Content="Марки" 
-                        Style="{StaticResource MenuButtonStyle}" Click="btnmarka_Click" 
-                      />
+                        Style="{StaticResource MenuButtonStyle}" 
+                        Click="btnmarka_Click"/>
 
                 <Button x:Name="btncvet" Content="Цвета" 
                         Style="{StaticResource MenuButtonStyle}" 
@@ -95,15 +102,13 @@
                         Click="btnsalon_Click"/>
 
                 <!-- Группа бронирований -->
-               
-
+                <TextBlock Text="Бронирования" Style="{StaticResource GroupHeaderStyle}"/>
                 <Button x:Name="buttonbron" Content="Бронирования" 
                         Style="{StaticResource MenuButtonStyle}" 
                         Click="buttonbron_Click"/>
 
                 <!-- Группа системы -->
-               
-
+                <TextBlock Text="Система" Style="{StaticResource GroupHeaderStyle}"/>
                 <Button x:Name="btnstrana" Content="Страны" 
                         Style="{StaticResource MenuButtonStyle}" 
                         Click="Button_Click10"/>
@@ -127,20 +132,27 @@
 
             <!-- Панель статуса -->
             <Border Grid.Row="0" Background="White" Padding="15" BorderBrush="#E0E0E0" BorderThickness="0,0,0,1">
-                <TextBlock Text="Административная панель" 
-                           FontSize="18" 
-                           FontWeight="Medium"/>
+                <Grid>
+                    <TextBlock Text="Административная панель" 
+                               FontSize="18" 
+                               FontWeight="Medium"
+                               VerticalAlignment="Center"/>
+
+                    <!-- Информация о пользователе -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <Ellipse Width="32" Height="32" Fill="#1976D2"/>
+                        <TextBlock Text="Администратор" 
+                                   Margin="10,0,0,0"
+                                   VerticalAlignment="Center"
+                                   FontWeight="Medium"/>
+                    </StackPanel>
+                </Grid>
             </Border>
 
             <!-- Контент -->
-            <Frame x:Name="MainFrame" 
-                   Grid.Row="1" 
-                   NavigationUIVisibility="Hidden" 
-                   Margin="15"
-                   Background="White"
-                   BorderBrush="#E0E0E0"
-                   BorderThickness="1"
-                   />
+            <Border Grid.Row="1" Margin="15" Background="White" CornerRadius="4">
+                <Image Source="/pages/honda-acura-nsx-widebody-khonda-akura-derevya.jpg"/>
+            </Border>
         </Grid>
     </Grid>
 </Page>

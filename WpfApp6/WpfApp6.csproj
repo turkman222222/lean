@@ -334,6 +334,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="pages\honda-acura-nsx-widebody-khonda-akura-derevya.jpg" />
     <Resource Include="172580_cars_icon.png" />
     <Content Include="AppDate\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
