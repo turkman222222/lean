@@ -95,7 +95,7 @@
 
                 <Button x:Name="btncompl" Content="Комплектации" 
                         Style="{StaticResource MenuButtonStyle}" 
-                        Click="Button_Click"/>
+                        Click="Button_Click5"/>
 
                 <Button x:Name="btnsalon" Content="Салоны" 
                         Style="{StaticResource MenuButtonStyle}" 

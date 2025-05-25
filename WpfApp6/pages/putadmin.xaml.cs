@@ -85,5 +85,11 @@ namespace WpfApp6.pages
             UserPage UserPage = new UserPage();
             NavigationService.Navigate(UserPage);
         }
+
+        private void Button_Click5(object sender, RoutedEventArgs e)
+        {
+            ComplPage ComplPage = new ComplPage();
+            NavigationService.Navigate(ComplPage);
+        }
     }
 }

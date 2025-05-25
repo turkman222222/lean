@@ -4,77 +4,71 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfApp6.pages"
-      xmlns:converters="clr-namespace:WpfApp6.Converters"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="900"
       Title="Комплектации"
-      Background="#FFF0F0F0">
-
-    <Page.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="Width" Value="30"/>
-            <Setter Property="Margin" Value="2"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Cursor" Value="Hand"/>
-        </Style>
-    </Page.Resources>
+      Background="#FFF5F5F5">
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
 
-        <!-- Header Panel -->
-        <Border Grid.Row="0" Background="#FF3F51B5" Padding="10">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBox x:Name="txtSearch" 
-                         HorizontalAlignment="Center" 
-                         Margin="5" 
-                         TextWrapping="Wrap"  
-                         VerticalAlignment="Center" 
-                         Width="300"
-                         Height="30"
-                         Background="White"
-                         Foreground="#333"
-                         FontSize="14"
-                         Padding="5"
-                         BorderBrush="#CCCCCC"
+        <!-- Шапка -->
+        <Border Grid.Row="0" Background="#FF3F51B5" CornerRadius="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="300"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="BackButton" Content="←" 
+                        FontSize="20" FontWeight="Bold"
+                        Foreground="White"
+                        Background="Transparent" BorderThickness="0"
+                        Width="50" Height="50"
+                        Click="BackButton_Click"
+                        Grid.Column="0"/>
+
+                <TextBlock Text="Управление комплектациями" 
+                           FontSize="20" FontWeight="Bold" 
+                           VerticalAlignment="Center" 
+                           Foreground="White"
+                           Grid.Column="1" Margin="20,0"/>
+
+                <TextBox x:Name="txtSearch" Grid.Column="2" 
+                         Width="250" Height="35"
+                         
+                         Background="#FFF5F5F5" Foreground="#333"
+                         FontSize="14" Padding="5"
+                         BorderBrush="#CCCCCC" BorderThickness="1"
+                         Margin="0,0,20,0"
                          TextChanged="txtSearch_TextChanged"/>
-            </StackPanel>
+            </Grid>
         </Border>
 
-        <!-- Main Content -->
-        <Border Grid.Row="1" Margin="10" BorderBrush="#CCCCCC" BorderThickness="1" Background="White" CornerRadius="4">
-            <ListView x:Name="ComplListView" >
+        <!-- Основной контент -->
+        <Border Grid.Row="1" Margin="15" CornerRadius="5" 
+                Background="White" BorderBrush="#E0E0E0" BorderThickness="1">
+            <ListView x:Name="ComplListView">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
-                        <Setter Property="Padding" Value="0"/>
-                        <Setter Property="Margin" Value="0,0,0,5"/>
-                        <Setter Property="Background" Value="Transparent"/>
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListViewItem">
-                                    <Border x:Name="Bd" 
-                                            BorderBrush="#DDD" 
-                                            BorderThickness="0,0,0,1" 
-                                            Padding="10"
-                                            Background="{TemplateBinding Background}">
+                                    <Border x:Name="Border" Background="White"  
+                                           >
                                         <ContentPresenter />
                                     </Border>
                                     <ControlTemplate.Triggers>
-                                        <Trigger Property="IsSelected" Value="True">
-                                            <Setter TargetName="Bd" Property="Background" Value="#E3F2FD"/>
-                                        </Trigger>
                                         <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="Bd" Property="Background" Value="#F5F5F5"/>
+                                            <Setter TargetName="Border" Property="Background" Value="#F5F5F5"/>
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="Border" Property="Background" Value="#E3F2FD"/>
                                         </Trigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
@@ -82,33 +76,36 @@
                         </Setter>
                     </Style>
                 </ListView.ItemContainerStyle>
+
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Left" Margin="10,0,0,0">
+                            <StackPanel>
                                 <TextBlock Text="{Binding kompl_name}" 
-                                           FontSize="16" 
-                                           FontWeight="Bold"
-                                           Foreground="#333"/>
+                                           FontSize="16" FontWeight="SemiBold"/>
+
                                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                    <TextBlock Text="Количество автомобилей: " Foreground="#666"/>
+                                    <TextBlock Text="Автомобилей: " Foreground="#666"/>
                                     <TextBlock Text="{Binding Carss.Count}" Foreground="#333"/>
                                 </StackPanel>
                             </StackPanel>
 
-                            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                <Button Content="✎" 
-                                        Foreground="#FF9800"
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" 
+                                        VerticalAlignment="Center" Margin="0,0,10,0">
+                                <Button Content="✎" Width="35" Height="35"
+                                        Background="Transparent" Foreground="#2196F3"
+                                        BorderThickness="0" FontSize="16"
                                         ToolTip="Редактировать"
                                         Click="EditItem_Click"/>
 
-                                <Button Content="🗑" 
-                                        Foreground="#F44336"
+                                <Button Content="🗑" Width="35" Height="35"
+                                        Background="Transparent" Foreground="#F44336"
+                                        BorderThickness="0" FontSize="16"
                                         ToolTip="Удалить"
                                         Click="DeleteItem_Click"/>
                             </StackPanel>
@@ -118,20 +115,19 @@
             </ListView>
         </Border>
 
-        <!-- Footer Panel -->
-        <Border Grid.Row="2" Background="#FFF5F5F5" Padding="10">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="Добавить комплектацию" 
-                        Height="35" 
-                        Width="200" 
-                        Background="#4CAF50"
-                        Foreground="White"
-                        BorderThickness="0"
-                        FontSize="14"
-                        Margin="5" 
-                        Click="AddNewItem_Click"/>
-            </StackPanel>
+        <!-- Кнопка добавления -->
+        <Border Grid.Row="2" Background="#FFF5F5F5">
+            <Button Content="Добавить комплектацию" 
+                    HorizontalAlignment="Right" VerticalAlignment="Center"
+                    Background="#FF4CAF50" Foreground="White"
+                    FontSize="14" FontWeight="SemiBold"
+                    Width="200" Height="40" Margin="0,0,20,0"
+                    BorderThickness="0" 
+                    Click="AddNewItem_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="8" ShadowDepth="2" Opacity="0.2"/>
+                </Button.Effect>
+            </Button>
         </Border>
-        <Button Content="←" Click="BackButton_Click" Margin="10,18,746,22" Background="#FFDE4848" />
     </Grid>
 </Page>

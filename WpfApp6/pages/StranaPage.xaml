@@ -70,7 +70,12 @@
                         Click="AddNewItem_Click"/>
             </StackPanel>
         </Border>
-        <Button Content="←" Click="BackButton_Click" Margin="10,18,746,22" 
-                Background="#FFDE4848" />
+        <Button x:Name="BackButton" Content="←" 
+          FontSize="20" FontWeight="Bold"
+          Foreground="White"
+          Background="Transparent" BorderThickness="0"
+          Width="50" Height="50"
+          Click="BackButton_Click"
+          Grid.Column="0" Margin="10,5,740,5"/>
     </Grid>
 </Page>
